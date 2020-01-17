@@ -7,8 +7,23 @@ import Header from '../shared/components/Header';
 import NewMember from "../features/members/NewMember";
 import Albums from '../features/albums/Albums';
 import MemberAlbums from "../features/albums/MemberAlbums";
+import {useDispatch} from "react-redux";
+import {UI_STATE} from "../shared/middleware/persistent";
+import {uiSlice} from "./ui.slice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    try {
+      const storedUiState = localStorage.getItem(UI_STATE);
+
+      if (storedUiState) {
+        dispatch(uiSlice.actions.uiStateRestored(JSON.parse(storedUiState)));
+      }
+    } finally {}
+  }, []);
+
   return (
       <Router>
           <div className="container">

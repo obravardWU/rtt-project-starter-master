@@ -4,6 +4,7 @@ import {AppState} from "../shared/types/appState";
 import {albumsSlice} from "../features/albums/albums.slice";
 import {authSlice} from "../features/auth/auth.slice";
 import {uiSlice} from "./ui.slice";
+import {persistent} from "../shared/middleware/persistent";
 
 export const store = configureStore<AppState>({
   reducer: {
@@ -11,5 +12,6 @@ export const store = configureStore<AppState>({
     albums: albumsSlice.reducer,
     curranUser: authSlice.reducer,
     ui: uiSlice.reducer
-  }
+  },
+  middleware: [persistent]
 });

@@ -10,6 +10,7 @@ export const uiSlice = createSlice<UiState, SliceCaseReducers<UiState>>({
     loading: false
   },
   reducers: {
+    uiStateRestored: (state: UiState, actions:PayloadAction<UiState>) => actions.payload,
     memberSelected: (state: UiState, action: PayloadAction<number>) => {
       const memberId = action.payload;
 
