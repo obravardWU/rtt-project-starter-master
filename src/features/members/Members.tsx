@@ -8,11 +8,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {allMembers, membersSlice} from "./members.slice";
 import {AppState} from "../../shared/types/appState";
 import {apiRequest} from "../../shared/utils/api";
+import {selectedMembersIds, uiSlice} from "../../app/ui.slice";
 
 
 const Members = () => {
-      const members = useSelector<AppState, MemberInfo[]>(allMembers);
       const dispatch = useDispatch();
+
+      const members = useSelector<AppState, MemberInfo[]>(allMembers);
+      const selectedMembers = useSelector<AppState, number[]>(selectedMembersIds);
+
 
       useEffect(() => {
         if (members.length === 0) {
@@ -20,6 +24,10 @@ const Members = () => {
               .then(results => dispatch(membersSlice.actions.membersLoaded(results.data)));
         }
       }, []);
+
+      const selectMember = (memberId:number) => {
+        dispatch(uiSlice.actions.memberSelected(memberId));
+      };
 
       return (
           <>
@@ -50,7 +58,8 @@ const Members = () => {
                     <td>{member.city}</td>
                     <td>{member.phone}</td>
                     <td><img src={member.picture} alt={member.name}/></td>
-                    <td><input type="checkbox"/></td>
+                    <td><input onClick={() => selectMember(member.id)}
+                               checked={selectedMembers.includes(member.id)} type="checkbox"/></td>
                   </TableRow>
               ))}
               </tbody>
