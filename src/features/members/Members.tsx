@@ -6,22 +6,20 @@ import {TableRow} from "../../shared/components/TableRow";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {allMembers, membersSlice} from "./members.slice";
+import {AppState} from "../../shared/types/appState";
+import {apiRequest} from "../../shared/utils/api";
 
-
-  // {
-  //   id: 4,
-  //   name: 'Nir Kaufman',
-  //   email: 'nir@500tech.com',
-  //   city: 'New York',
-  //   phone: '12341234',
-  //   picture: "https://randomuser.me/api/portraits/thumb/men/6.jpg"
-  // },
-//
-// ];
 
 const Members = () => {
-      const members = useSelector(allMembers);
+      const members = useSelector<AppState, MemberInfo[]>(allMembers);
+      const dispatch = useDispatch();
 
+      useEffect(() => {
+        if (members.length === 0) {
+          apiRequest({path: '/members'})
+              .then(results => dispatch(membersSlice.actions.membersLoaded(results.data)));
+        }
+      }, []);
 
       return (
           <>

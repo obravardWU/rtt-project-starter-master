@@ -7,24 +7,8 @@ import Header from '../shared/components/Header';
 import NewMember from "../features/members/NewMember";
 import Albums from '../features/albums/Albums';
 import MemberAlbums from "../features/albums/MemberAlbums";
-import {membersSlice} from "../features/members/members.slice";
-import {useDispatch} from "react-redux";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(membersSlice.actions.membersLoaded([
-      {
-        id: 4,
-        name: 'Nir Kaufman',
-        email: 'nir@500tech.com',
-        city: 'New York',
-        phone: '12341234',
-        picture: "https://randomuser.me/api/portraits/thumb/men/6.jpg"
-      }
-    ]))
-  },[]);
   return (
       <Router>
           <div className="container">
