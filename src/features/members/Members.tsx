@@ -1,48 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {MemberInfo} from "./types";
 import {TableHeader, TableHeaderRow} from "../../shared/components/TableHeader";
 import {Link} from "react-router-dom";
 import {TableRow} from "../../shared/components/TableRow";
 import styled from "styled-components";
+import {useDispatch, useSelector} from "react-redux";
+import {allMembers, membersSlice} from "./members.slice";
 
-//todo: mock data - replace with real data
-const members: MemberInfo[] = [
-  {
-    id: 1,
-    name: 'Nir Kaufman',
-    email: 'nir@500tech.com',
-    city: 'New York',
-    phone: '12341234',
-    picture: "https://randomuser.me/api/portraits/thumb/men/6.jpg"
-  },
-  {
-    id: 2,
-    name: 'Nir Kaufman',
-    email: 'nir@500tech.com',
-    city: 'New York',
-    phone: '12341234',
-    picture: "https://randomuser.me/api/portraits/thumb/men/6.jpg"
-  },
-  {
-    id: 3,
-    name: 'Nir Kaufman',
-    email: 'nir@500tech.com',
-    city: 'New York',
-    phone: '12341234',
-    picture: "https://randomuser.me/api/portraits/thumb/men/6.jpg"
-  },
-  {
-    id: 4,
-    name: 'Nir Kaufman',
-    email: 'nir@500tech.com',
-    city: 'New York',
-    phone: '12341234',
-    picture: "https://randomuser.me/api/portraits/thumb/men/6.jpg"
-  },
 
-];
+  // {
+  //   id: 4,
+  //   name: 'Nir Kaufman',
+  //   email: 'nir@500tech.com',
+  //   city: 'New York',
+  //   phone: '12341234',
+  //   picture: "https://randomuser.me/api/portraits/thumb/men/6.jpg"
+  // },
+//
+// ];
 
 const Members = () => {
+      const members = useSelector(allMembers);
+
+
       return (
           <>
             <TableHeader>
